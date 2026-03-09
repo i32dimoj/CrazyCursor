@@ -12,7 +12,8 @@ echo [!] Python no encontrado. Iniciando descarga...
 
 :: 2. Descargar instalador de Python 3.13 (64-bit)
 :: Usamos curl que viene integrado en Windows 10/11
-curl -L "https://www.python.org" -o "%PYTHON_INSTALLER%"
+::curl -L "https://www.python.org" -o "%PYTHON_INSTALLER%"
+curl -L "https://python.org" -o "%PYTHON_INSTALLER%"
 
 if %ERRORLEVEL% neq 0 (
     echo [ERROR] No se pudo descargar Python. Revisa tu conexion.
