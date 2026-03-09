@@ -1,6 +1,7 @@
 @echo off
 set "PYTHON_EXE=C:\Program Files\Python313\python.exe"
 set "PYTHON_INSTALLER=%TEMP%\python_installer.exe"
+set "PYTHON_DIR=C:\Program Files\Python313"
 
 :: 1. Verificar si Python existe en la ruta
 if exist "%PYTHON_EXE%" (
@@ -23,7 +24,7 @@ if %ERRORLEVEL% neq 0 (
 
 echo [*] Instalando Python... Por favor, espera.
 :: 3. Instalacion silenciosa (Añade Python al PATH e instala para todos los usuarios)
-start /wait "" "%PYTHON_INSTALLER%" /quiet InstallAllUsers=1 PrependPath=1
+start /wait "" "%PYTHON_INSTALLER%" /quiet InstallAllUsers=1 PrependPath=1 TargetDir="%PYTHON_DIR%"
 
 :: 4. Borrar el instalador tras terminar
 del "%PYTHON_INSTALLER%"
