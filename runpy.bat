@@ -29,4 +29,6 @@ del "%PYTHON_INSTALLER%"
 
 :run
 echo [🚀] Arrancando CrazyCursor...
-start "" /MAX "%PYTHON_EXE%" "d:/@JORGED/MisProgramas/PY/CrazyCursor/crazy.py"
+::start "" /MAX "%PYTHON_EXE%" "d:/@JORGED/MisProgramas/PY/CrazyCursor/crazy.py"
+start "" cmd /c "mode con: cols=80 lines=10 && "%PYTHON_EXE%" "d:/@JORGED/MisProgramas/PY/CrazyCursor/crazy.py""
+

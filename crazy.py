@@ -21,7 +21,8 @@ for i in range(segundos * 10, -1, -1):
     sys.stdout.flush()
     time.sleep(0.1)
 
-print("\n\n🚀 ¡A MOVERSE! (Recuerda: Tecla 'ESC' varias veces para parar)")
+print("\n\n🚀 ¡A MOVERSE!")
+print("🎯 Haz clic en esta ventana y pulsa la tecla 'ESC' varias veces para parar")
 
 try:
     while True:
@@ -43,7 +44,7 @@ try:
         
         # Tweens: Hacen que el ratón acelere y frene (como una mano de verdad)
         # Opciones: easeInQuad, easeOutQuad, easeInOutSine
-        pyautogui.moveTo(x, y, duration=random.uniform(0.5, 1.5), tween=pyautogui.easeInOutQuad)
+        pyautogui.moveTo(x, y, duration=random.uniform(0.5, 3.5), tween=pyautogui.easeInOutQuad)
         
         # Pausa aleatoria para no parecer un bot
         time.sleep(random.uniform(1, 3))
