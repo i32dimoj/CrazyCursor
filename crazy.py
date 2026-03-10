@@ -47,7 +47,7 @@ try:
         pyautogui.moveTo(x, y, duration=random.uniform(0.5, 3.5), tween=pyautogui.easeInOutQuad)
         # 2. SE DETIENE Y HACE CLICK
         #pyautogui.click()
-        p#rint(f"[{time.strftime('%H:%M:%S')}] 🖱️ Click en ({x}, {y})")
+        #print(f"[{time.strftime('%H:%M:%S')}] 🖱️ Click en ({x}, {y})")
         
         # Pausa aleatoria para no parecer un bot
         time.sleep(random.uniform(1, 3))
