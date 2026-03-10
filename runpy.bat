@@ -1,36 +1,33 @@
 @echo off
+setlocal enabledelayedexpansion
+
+:: 1. Definir rutas absolutas
 set "PYTHON_EXE=C:\Program Files\Python313\python.exe"
-set "PYTHON_INSTALLER=%TEMP%\python_installer.exe"
-set "PYTHON_DIR=C:\Program Files\Python313"
+set "SCRIPT_PY=%~dp0crazy.py"
 
-:: 1. Verificar si Python existe en la ruta
-if exist "%PYTHON_EXE%" (
-    echo [OK] Python detectado.
-    goto :run
+:: 2. Si no existe Python, instalarlo con TODO incluido
+if not exist "%PYTHON_EXE%" (
+    echo [!] Python 3.13 no encontrado. Instalando con PIP habilitado...
+    curl -L "https://www.python.org/ftp/python/3.13.12/python-3.13.12-amd64.exe" -o "%TEMP%\py_inst.exe"
+    :: PrependPath=1 y Include_pip=1 son claves aquí
+    start /wait "" "%TEMP%\py_inst.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1 TargetDir="C:\Program Files\Python313"
+    del "%TEMP%\py_inst.exe"
 )
 
-echo [!] Python no encontrado. Iniciando descarga...
+:: 3. REPARAR PIP E INSTALAR LIBRERÍAS (Solución al ModuleNotFoundError)
+echo [*] Verificando gestor de paquetes y librerias...
+:: Forceamos la activación de pip por si el instalador lo omitió
+"%PYTHON_EXE%" -m ensurepip --upgrade >nul 2>&1
+:: Instalamos las librerias ignorando configuraciones de usuario previas
+"%PYTHON_EXE%" -m pip install --upgrade pip
+"%PYTHON_EXE%" -m pip install pyautogui keyboard --no-warn-script-location
 
-:: 2. Descargar instalador de Python 3.13 (64-bit)
-:: Usamos curl que viene integrado en Windows 10/11
-::curl -L "https://www.python.org" -o "%PYTHON_INSTALLER%"
-curl -L "https://www.python.org/ftp/python/3.13.12/python-3.13.12-amd64.exe" -o "%PYTHON_INSTALLER%"
-
-if %ERRORLEVEL% neq 0 (
-    echo [ERROR] No se pudo descargar Python. Revisa tu conexion.
+:: 4. Ejecución verificando el archivo .py
+if not exist "%SCRIPT_PY%" (
+    echo [ERROR] No se encuentra crazy.py en: %SCRIPT_PY%
     pause
-    exit
+    exit /b
 )
 
-echo [*] Instalando Python... Por favor, espera.
-:: 3. Instalacion silenciosa (Añade Python al PATH e instala para todos los usuarios)
-start /wait "" "%PYTHON_INSTALLER%" /quiet InstallAllUsers=1 PrependPath=1 TargetDir="%PYTHON_DIR%"
-
-:: 4. Borrar el instalador tras terminar
-del "%PYTHON_INSTALLER%"
-
-:run
-echo [🚀] Arrancando CrazyCursor...
-::start "" /MAX "%PYTHON_EXE%" "d:/@JORGED/MisProgramas/PY/CrazyCursor/crazy.py"
-start "" cmd /c "mode con: cols=80 lines=10 && "%PYTHON_EXE%" "d:/@JORGED/MisProgramas/PY/CrazyCursor/crazy.py""
-
+echo [🚀] Arrancando CrazyCursor con "%PYTHON_EXE%"
+start "" conhost.exe cmd /k "mode con: cols=80 lines=10 && title CrazyCursor && "%PYTHON_EXE%" "%SCRIPT_PY%""
