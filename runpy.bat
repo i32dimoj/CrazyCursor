@@ -30,4 +30,4 @@ if not exist "%SCRIPT_PY%" (
 )
 
 echo [🚀] Arrancando CrazyCursor con "%PYTHON_EXE%"
-start "" cmd /k "mode con: cols=80 lines=10 && title CrazyCursor && "%PYTHON_EXE%" "%SCRIPT_PY%""
+start "" conhost.exe cmd /k "mode con: cols=80 lines=10 && title CrazyCursor && "%PYTHON_EXE%" "%SCRIPT_PY%""
