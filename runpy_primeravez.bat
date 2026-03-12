@@ -2,15 +2,15 @@
 setlocal enabledelayedexpansion
 
 :: 1. Definir rutas absolutas
-set "PYTHON_EXE=C:\Program Files\Python313\python.exe"
+set "PYTHON_EXE=C:\Program Files\Python314\python.exe"
 set "SCRIPT_PY=%~dp0crazy.py"
 
 :: 2. Si no existe Python, instalarlo con TODO incluido
 if not exist "%PYTHON_EXE%" (
-    echo [!] Python 3.13 no encontrado. Instalando con PIP habilitado...
-    curl -L "https://www.python.org/ftp/python/3.13.12/python-3.13.12-amd64.exe" -o "%TEMP%\py_inst.exe"
+    echo [!] Python 3.14 no encontrado. Instalando con PIP habilitado...
+    curl -L "https://www.python.org/ftp/python/3.14.3/python-3.14.3-amd64.exe" -o "%TEMP%\py_inst.exe"
     :: PrependPath=1 y Include_pip=1 son claves aquí
-    start /wait "" "%TEMP%\py_inst.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1 TargetDir="C:\Program Files\Python313"
+    start /wait "" "%TEMP%\py_inst.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_pip=1 TargetDir="C:\Program Files\Python314"
     del "%TEMP%\py_inst.exe"
 )
 

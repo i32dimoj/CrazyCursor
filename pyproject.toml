@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "CrazyCursor"
+version = "0.1.0"
+description = "App to keep windows alive"
+authors = ["Jorge Díaz Morales <jorge.diaz.morales@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+
+# Add venv directory information for code editor
+[tool.pyright]
+venvPath = "..\"
+venv = ".venv"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
